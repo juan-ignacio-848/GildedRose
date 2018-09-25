@@ -2,9 +2,9 @@ package org.gildedrose.qualitycontrol;
 
 import org.gildedrose.Item;
 
-public class DefaultQualityControl implements QualityControl {
+public class ConjuredQualityControl implements QualityControl {
 
-    protected DefaultQualityControl(){}
+    protected ConjuredQualityControl(){}
 
     @Override
     public void updateQualityFor(Item item) {
@@ -14,16 +14,15 @@ public class DefaultQualityControl implements QualityControl {
     private int qualityDegradeFor(Item item) {
         int defaultQualityDegrade = defaultQualityDegrade(item);
         return item.getQuality() - defaultQualityDegrade >= 0
-                    ? defaultQualityDegrade
-                    : item.getQuality();
+                ? defaultQualityDegrade
+                : item.getQuality();
     }
 
     private int defaultQualityDegrade(Item item) {
         if(item.sellIn < 0) {
-            return QualityControl.DEFAULT_QUALITY_DEGRADE * 2;
+            return QualityControl.DEFAULT_QUALITY_DEGRADE * 3;
         }
 
-        return QualityControl.DEFAULT_QUALITY_DEGRADE;
+        return QualityControl.DEFAULT_QUALITY_DEGRADE * 2;
     }
-
 }
