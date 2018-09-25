@@ -1,3 +1,5 @@
+import org.gildedrose.GildedRose;
+import org.gildedrose.Item;
 import org.junit.Before;
 import org.junit.Test;
 
