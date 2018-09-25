@@ -17,20 +17,20 @@ public class GildedRose {
     }
 
     private void updateAn(Item item) {
-        updateQualityOf(item);
+        updateQualityFor(item);
 
-        updateSellInOf(item);
+        updateSellInFor(item);
 
-        updateExpired(item);
+        updateQualityForExpired(item);
     }
 
-    private void updateSellInOf(Item item) {
+    private void updateSellInFor(Item item) {
         if (!"Sulfuras, Hand of Ragnaros".equals(item.getName())) {
             item.setSellIn(item.getSellIn() - 1);
         }
     }
 
-    private void updateQualityOf(Item item) {
+    private void updateQualityFor(Item item) {
         if (("Aged Brie".equals(item.getName()))) {
             if (item.getQuality() < 50) {
                 item.setQuality(item.getQuality() + 1);
@@ -58,7 +58,7 @@ public class GildedRose {
         }
     }
 
-    private void updateExpired(Item item) {
+    private void updateQualityForExpired(Item item) {
         if (item.getSellIn() < 0) {
             if ("Aged Brie".equals(item.getName())) {
                 if (item.getQuality() < 50) {
