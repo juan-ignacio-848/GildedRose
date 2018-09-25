@@ -13,8 +13,8 @@ public class GildedRose {
     {
         for (Item item : items) {
             QualityControl qualityControl = createQualityControlFor(item);
-            qualityControl.updateQualityFor(item);
             updateSellInFor(item);
+            qualityControl.updateQualityFor(item);
             qualityControl.updateQualityForExpired(item);
         }
     }
@@ -41,7 +41,7 @@ public class GildedRose {
         }
     }
 
-    private class QualityControl {
+    private abstract class QualityControl {
 
         protected void updateQualityFor(Item item) {
 
@@ -94,9 +94,7 @@ public class GildedRose {
         @Override
         protected void updateQualityForExpired(Item item) {
             if(item.sellIn < 0) {
-                if ("Backstage passes to a TAFKAL80ETC concert".equals(item.getName())) {
-                    item.setQuality(0);
-                }
+                item.setQuality(0);
             }
         }
     }

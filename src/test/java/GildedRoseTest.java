@@ -64,8 +64,8 @@ public class GildedRoseTest {
     }
 
     @Test
-    public void should_increase_quality_by_2_of_backstage_passes_when_sell_in_between_6_and_10() {
-        Item item = addItem(new Item("Backstage passes to a TAFKAL80ETC concert", 6, 20));
+    public void should_increase_quality_by_2_of_backstage_passes_when_sell_in_between_7_and_10() {
+        Item item = addItem(new Item("Backstage passes to a TAFKAL80ETC concert", 7, 20));
 
         gildedRose.updateQuality();
 
