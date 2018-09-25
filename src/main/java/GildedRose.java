@@ -15,10 +15,10 @@ public class GildedRose {
             QualityControl qualityControl = createQualityControlFor(item);
             updateSellInFor(item);
             qualityControl.updateQualityFor(item);
-            qualityControl.updateQualityForExpired(item);
         }
     }
 
+    // TODO: Factory
     private QualityControl createQualityControlFor(Item item) {
         if("Aged Brie".equals(item.getName())) {
             return new AgedBrieQualityControl();
@@ -41,39 +41,30 @@ public class GildedRose {
         }
     }
 
-    private abstract class QualityControl {
-
-        protected void updateQualityFor(Item item) {
-
-        }
-
-        protected void updateQualityForExpired(Item item) {
-
-        }
+    private interface QualityControl {
+        void updateQualityFor(Item item);
     }
 
-    private class AgedBrieQualityControl extends QualityControl {
+    private class AgedBrieQualityControl implements QualityControl {
 
         @Override
-        protected void updateQualityFor(Item item) {
+        public void updateQualityFor(Item item) {
             if (item.getQuality() < 50) {
                 item.setQuality(item.getQuality() + 1);
             }
-        }
 
-        @Override
-        protected void updateQualityForExpired(Item item) {
             if(item.sellIn < 0) {
                 if (item.getQuality() < 50) {
                     item.setQuality(item.getQuality() + 1);
                 }
             }
         }
+
     }
 
-    private class BackStagePassesQualityControl extends QualityControl {
+    private class BackStagePassesQualityControl implements QualityControl {
         @Override
-        protected void updateQualityFor(Item item) {
+        public void updateQualityFor(Item item) {
             if (item.getQuality() < 50) {
                 item.setQuality(item.getQuality() + 1);
 
@@ -89,41 +80,34 @@ public class GildedRose {
                     }
                 }
             }
-        }
 
-        @Override
-        protected void updateQualityForExpired(Item item) {
             if(item.sellIn < 0) {
                 item.setQuality(0);
             }
         }
+
     }
 
-    private class SulfurasQualityControl extends QualityControl {
+    private class SulfurasQualityControl implements QualityControl {
         @Override
-        protected void updateQualityFor(Item item) {
+        public void updateQualityFor(Item item) {
         }
 
-        @Override
-        protected void updateQualityForExpired(Item item) {
-        }
     }
 
-    private class DefaultQualityControl extends QualityControl {
+    private class DefaultQualityControl implements QualityControl {
         @Override
-        protected void updateQualityFor(Item item) {
+        public void updateQualityFor(Item item) {
             if (item.getQuality() > 0) {
                 item.setQuality(item.getQuality() - 1);
             }
-        }
 
-        @Override
-        protected void updateQualityForExpired(Item item) {
             if (item.getSellIn() < 0) {
                 if (item.getQuality() > 0) {
                     item.setQuality(item.getQuality() - 1);
                 }
             }
         }
+
     }
 }
