@@ -7,6 +7,8 @@ public class BackStagePassesQualityControl implements QualityControl {
     private static final int FIVE_DAYS = 5;
     private static final int TEN_DAYS = 10;
 
+    protected BackStagePassesQualityControl(){}
+
     @Override
     public void updateQualityFor(Item item) {
         if (item.getQuality() < MAXIMUM_ITEM_QUALITY) {

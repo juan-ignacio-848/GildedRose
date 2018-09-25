@@ -4,6 +4,8 @@ import org.gildedrose.Item;
 
 public class AgedBrieQualityControl implements QualityControl {
 
+    protected AgedBrieQualityControl(){}
+
     @Override
     public void updateQualityFor(Item item) {
         if (item.getQuality() < MAXIMUM_ITEM_QUALITY) {

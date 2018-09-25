@@ -1,5 +1,7 @@
 import org.gildedrose.GildedRose;
 import org.gildedrose.Item;
+import org.gildedrose.qualitycontrol.QualityControl;
+import org.gildedrose.qualitycontrol.QualityControlFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,11 +15,13 @@ public class GildedRoseTest {
 
     private List<Item> items;
     private GildedRose gildedRose;
+    private QualityControlFactory qualityControlFactory;
 
     @Before
     public void setUp() {
         items = new ArrayList<Item>();
-        gildedRose = new GildedRose(items);
+        qualityControlFactory = new QualityControlFactory();
+        gildedRose = new GildedRose(items, qualityControlFactory);
     }
 
     @Test
