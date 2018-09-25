@@ -41,20 +41,16 @@ public class GildedRose {
         }
     }
 
-    private interface QualityControl {
-        void updateQualityFor(Item item);
-    }
-
     private class AgedBrieQualityControl implements QualityControl {
 
         @Override
         public void updateQualityFor(Item item) {
-            if (item.getQuality() < 50) {
+            if (item.getQuality() < MAXIMUM_ITEM_QUALITY) {
                 item.setQuality(item.getQuality() + 1);
             }
 
             if(item.sellIn < 0) {
-                if (item.getQuality() < 50) {
+                if (item.getQuality() < MAXIMUM_ITEM_QUALITY) {
                     item.setQuality(item.getQuality() + 1);
                 }
             }
@@ -62,20 +58,30 @@ public class GildedRose {
 
     }
 
+    interface QualityControl {
+        int MAXIMUM_ITEM_QUALITY = 50;
+
+        void updateQualityFor(Item item);
+    }
+
     private class BackStagePassesQualityControl implements QualityControl {
+
+        private static final int FIVE_DAYS = 5;
+        private static final int TEN_DAYS = 10;
+
         @Override
         public void updateQualityFor(Item item) {
-            if (item.getQuality() < 50) {
+            if (item.getQuality() < MAXIMUM_ITEM_QUALITY) {
                 item.setQuality(item.getQuality() + 1);
 
-                if (item.getSellIn() < 11) {
-                    if (item.getQuality() < 50) {
+                if (item.getSellIn() <= TEN_DAYS) {
+                    if (item.getQuality() < MAXIMUM_ITEM_QUALITY) {
                         item.setQuality(item.getQuality() + 1);
                     }
                 }
 
-                if (item.getSellIn() < 6) {
-                    if (item.getQuality() < 50) {
+                if (item.getSellIn() <= FIVE_DAYS) {
+                    if (item.getQuality() < MAXIMUM_ITEM_QUALITY) {
                         item.setQuality(item.getQuality() + 1);
                     }
                 }
