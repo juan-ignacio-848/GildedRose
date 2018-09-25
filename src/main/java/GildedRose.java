@@ -32,9 +32,25 @@ public class GildedRose {
 
     private void updateQualityOf(Item item) {
         if (("Aged Brie".equals(item.getName()))) {
-            updateAgedBrieOrBackstagePassesQuality(item);
+            if (item.getQuality() < 50) {
+                item.setQuality(item.getQuality() + 1);
+            }
         } else if ("Backstage passes to a TAFKAL80ETC concert".equals(item.getName())) {
-            updateAgedBrieOrBackstagePassesQuality(item);
+            if (item.getQuality() < 50) {
+                item.setQuality(item.getQuality() + 1);
+
+                if (item.getSellIn() < 11) {
+                    if (item.getQuality() < 50) {
+                        item.setQuality(item.getQuality() + 1);
+                    }
+                }
+
+                if (item.getSellIn() < 6) {
+                    if (item.getQuality() < 50) {
+                        item.setQuality(item.getQuality() + 1);
+                    }
+                }
+            }
         } else if (!"Sulfuras, Hand of Ragnaros".equals(item.getName())) {
             if (item.getQuality() > 0) {
                 item.setQuality(item.getQuality() - 1);
@@ -49,30 +65,10 @@ public class GildedRose {
                     item.setQuality(item.getQuality() + 1);
                 }
             } else if ("Backstage passes to a TAFKAL80ETC concert".equals(item.getName())) {
-                item.setQuality(item.getQuality() - item.getQuality());
+                item.setQuality(0);
             } else if (!"Sulfuras, Hand of Ragnaros".equals(item.getName())) {
                 if (item.getQuality() > 0) {
                     item.setQuality(item.getQuality() - 1);
-                }
-            }
-        }
-    }
-
-    private void updateAgedBrieOrBackstagePassesQuality(Item item) {
-        if (item.getQuality() < 50) {
-            item.setQuality(item.getQuality() + 1);
-
-            if ("Backstage passes to a TAFKAL80ETC concert".equals(item.getName())) {
-                if (item.getSellIn() < 11) {
-                    if (item.getQuality() < 50) {
-                        item.setQuality(item.getQuality() + 1);
-                    }
-                }
-
-                if (item.getSellIn() < 6) {
-                    if (item.getQuality() < 50) {
-                        item.setQuality(item.getQuality() + 1);
-                    }
                 }
             }
         }
