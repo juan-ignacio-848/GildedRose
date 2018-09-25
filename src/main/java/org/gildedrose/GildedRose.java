@@ -9,15 +9,13 @@ public class GildedRose {
 
     private final QualityControlFactory qualityControlFactory;
     private final SellInControl sellInControl;
-    private List<Item> items;
 
-    public GildedRose(List<Item> items, QualityControlFactory qualityControlFactory, SellInControl sellInControl) {
+    public GildedRose(QualityControlFactory qualityControlFactory, SellInControl sellInControl) {
         this.qualityControlFactory = qualityControlFactory;
-        this.items = items;
         this.sellInControl = sellInControl;
     }
 
-    public void updateQuality() {
+    public void updateQuality(List<Item> items) {
         for (Item item : items) {
             updateSellInFor(item);
             updateQualityFor(item);
