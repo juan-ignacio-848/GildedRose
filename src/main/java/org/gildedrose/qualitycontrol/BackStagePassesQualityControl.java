@@ -2,34 +2,34 @@ package org.gildedrose.qualitycontrol;
 
 import org.gildedrose.Item;
 
+import static java.lang.Math.min;
+
 public class BackStagePassesQualityControl implements QualityControl {
 
     private static final int FIVE_DAYS = 5;
     private static final int TEN_DAYS = 10;
+    private static final int NO_INCREASE = 0;
 
     protected BackStagePassesQualityControl(){}
 
     @Override
     public void updateQualityFor(Item item) {
-        if (item.getQuality() < MAXIMUM_ITEM_QUALITY) {
-            item.setQuality(item.getQuality() + 1);
+        item.setQuality(qualityIncreaseFor(item));
+    }
 
-            if (item.getSellIn() <= TEN_DAYS) {
-                if (item.getQuality() < MAXIMUM_ITEM_QUALITY) {
-                    item.setQuality(item.getQuality() + 1);
-                }
-            }
+    private int qualityIncreaseFor(Item item) {
+        final int increasedQuality = item.getQuality() + defaultQualityIncreaseFor(item);
+        return item.getSellIn() >= 0 ? min(increasedQuality, MAXIMUM_ITEM_QUALITY) : NO_INCREASE;
+    }
 
-            if (item.getSellIn() <= FIVE_DAYS) {
-                if (item.getQuality() < MAXIMUM_ITEM_QUALITY) {
-                    item.setQuality(item.getQuality() + 1);
-                }
-            }
+    private int defaultQualityIncreaseFor(Item item) {
+        if(item.getSellIn() <= FIVE_DAYS) {
+            return DEFAULT_QUALITY_INCREASE * 3;
+        } else if(item.getSellIn() <= TEN_DAYS) {
+            return DEFAULT_QUALITY_INCREASE * 2;
         }
 
-        if(item.sellIn < 0) {
-            item.setQuality(0);
-        }
+        return DEFAULT_QUALITY_INCREASE;
     }
 
 }

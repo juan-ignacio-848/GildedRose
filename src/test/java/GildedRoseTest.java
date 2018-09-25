@@ -1,7 +1,7 @@
 import org.gildedrose.GildedRose;
 import org.gildedrose.Item;
-import org.gildedrose.qualitycontrol.QualityControl;
 import org.gildedrose.qualitycontrol.QualityControlFactory;
+import org.gildedrose.sellincontrol.SellInControl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,7 +21,7 @@ public class GildedRoseTest {
     public void setUp() {
         items = new ArrayList<Item>();
         qualityControlFactory = new QualityControlFactory();
-        gildedRose = new GildedRose(items, qualityControlFactory);
+        gildedRose = new GildedRose(items, qualityControlFactory, new SellInControl());
     }
 
     @Test

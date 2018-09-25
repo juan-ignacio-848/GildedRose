@@ -8,15 +8,22 @@ public class DefaultQualityControl implements QualityControl {
 
     @Override
     public void updateQualityFor(Item item) {
-        if (item.getQuality() > 0) {
-            item.setQuality(item.getQuality() - 1);
+        item.setQuality(item.getQuality() - qualityDecreaseFor(item));
+    }
+
+    private int qualityDecreaseFor(Item item) {
+        int defaultQualityDecrease = defaultQualityDecrease(item);
+        return item.getQuality() - defaultQualityDecrease >= 0
+                    ? defaultQualityDecrease
+                    : item.getQuality();
+    }
+
+    private int defaultQualityDecrease(Item item) {
+        if(item.sellIn < 0) {
+            return QualityControl.DEFAULT_QUALITY_DECREASE * 2;
         }
 
-        if (item.getSellIn() < 0) {
-            if (item.getQuality() > 0) {
-                item.setQuality(item.getQuality() - 1);
-            }
-        }
+        return QualityControl.DEFAULT_QUALITY_DECREASE;
     }
 
 }
