@@ -102,7 +102,22 @@ public class CharacterizationTests {
 		assertThat(backstagePasses.quality, is(28));
 	}
 
-    @Test
+	@Test
+	public void backstage_passes_sellIn_decreases_by_1_and_quality_drops_to_0_when_sellIn_is_less_or_equal_to_0() {
+		Item backstagePasses = new Item(BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, -1, 25);
+		Item[] items = new Item[] {
+				backstagePasses
+		};
+
+		GildedRose gildedRose = new GildedRose(items);
+
+		gildedRose.updateQuality();
+
+		assertThat(backstagePasses.sellIn, is(-2));
+		assertThat(backstagePasses.quality, is(0));
+	}
+
+	@Test
     public void normal_item_sellIn_decreases_by_1_and_quality_decreases_by_1_when_sellIn_is_greater_than_0() {
         Item backstagePasses = new Item(JUST_A_NORMAL_ITEM, 5, 25);
         Item[] items = new Item[] {
