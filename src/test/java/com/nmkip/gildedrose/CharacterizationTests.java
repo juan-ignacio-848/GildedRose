@@ -7,11 +7,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class CharacterizationTests {
 
-	private static final String AGED_BRIE = "Aged Brie";
+    private static final String AGED_BRIE = "Aged Brie";
     private static final String SULFURAS_HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
 	private static final String BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT = "Backstage passes to a TAFKAL80ETC concert";
+    public static final String JUST_A_NORMAL_ITEM = "Just a normal item";
 
-	@Test
+    @Test
 	public void aged_brie_sellIn_decreases_by_1_and_quality_increases_by_1_when_sellIn_is_greater_than_0() {
 		Item agedBrie = new Item(AGED_BRIE, 20, 20);
 		Item[] items = new Item[] {
@@ -102,8 +103,8 @@ public class CharacterizationTests {
 	}
 
     @Test
-    public void normal_item_sellIn_decreases_by_1_and_quality_decreases_by_1() {
-        Item backstagePasses = new Item("Just a normal item", 5, 25);
+    public void normal_item_sellIn_decreases_by_1_and_quality_decreases_by_1_when_sellIn_is_greater_than_0() {
+        Item backstagePasses = new Item(JUST_A_NORMAL_ITEM, 5, 25);
         Item[] items = new Item[] {
                 backstagePasses
         };
@@ -114,6 +115,21 @@ public class CharacterizationTests {
 
         assertThat(backstagePasses.sellIn, is(4));
         assertThat(backstagePasses.quality, is(24));
+    }
+
+    @Test
+    public void normal_item_sellIn_decreases_by_1_and_quality_decreases_by_2_when_sellIn_is_equal_to_0() {
+        Item backstagePasses = new Item(JUST_A_NORMAL_ITEM, 0, 25);
+        Item[] items = new Item[] {
+                backstagePasses
+        };
+
+        GildedRose gildedRose = new GildedRose(items);
+
+        gildedRose.updateQuality();
+
+        assertThat(backstagePasses.sellIn, is(-1));
+        assertThat(backstagePasses.quality, is(23));
     }
 
 }
