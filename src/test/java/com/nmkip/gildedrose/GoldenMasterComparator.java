@@ -11,12 +11,12 @@ public class GoldenMasterComparator extends GoldenMaster {
 
     @Test
     public void golden_master_output_should_still_be_valid() throws IOException {
-        Item[] items = fromFile(INPUT);
+        Item[] items = fromFile(INPUT_CASES);
         GildedRose gildedRose = new GildedRose(items);
 
         gildedRose.updateQuality();
 
-        assertEquals(items, fromFile(ACCEPTED_OUTPUT));
+        assertEquals(items, fromFile(EXPECTED_OUTPUT));
     }
 
 }

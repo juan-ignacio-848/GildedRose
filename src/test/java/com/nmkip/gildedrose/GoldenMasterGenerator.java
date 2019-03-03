@@ -13,7 +13,7 @@ public class GoldenMasterGenerator extends GoldenMaster {
 
     @Test
     public void generate_golden_master() throws IOException {
-        Item[] items = fromFile(INPUT);
+        Item[] items = fromFile(INPUT_CASES);
         GildedRose gildedRose = new GildedRose(items);
 
         gildedRose.updateQuality();
@@ -25,6 +25,6 @@ public class GoldenMasterGenerator extends GoldenMaster {
         String result = Arrays.stream(items)
                                .map(Item::toString)
                                .collect(Collectors.joining("\n"));
-        Files.write(Paths.get(ACCEPTED_OUTPUT), result.getBytes());
+        Files.write(Paths.get(EXPECTED_OUTPUT), result.getBytes());
     }
 }

@@ -5,8 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 class GoldenMaster {
-    static final String ACCEPTED_OUTPUT = "src/test/resources/out/golden_master_output.txt";
-    static final String INPUT = "src/test/resources/golden_master_input.txt";
+    static final String EXPECTED_OUTPUT = "src/test/resources/out/golden_master_output.txt";
+    static final String INPUT_CASES = "src/test/resources/golden_master_input.txt";
 
     Item[] fromFile(String uri) throws IOException {
         return Files.lines(Paths.get(uri))
