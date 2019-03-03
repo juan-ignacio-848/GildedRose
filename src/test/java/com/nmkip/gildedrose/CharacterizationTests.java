@@ -28,8 +28,8 @@ public class CharacterizationTests {
 	}
 
 	@Test
-	public void aged_brie_sellIn_decreases_by_1_and_quality_increases_by_1_when_sellIn_is_equal_to_0() {
-		Item agedBrie = new Item(AGED_BRIE, 0, 20);
+	public void aged_brie_sellIn_decreases_by_1_and_quality_increases_by_1_when_sellIn_is_less_or_equal_to_0() {
+		Item agedBrie = new Item(AGED_BRIE, -1, 20);
 		Item[] items = new Item[] {
 				agedBrie
 		};
@@ -38,7 +38,7 @@ public class CharacterizationTests {
 
 		gildedRose.updateQuality();
 
-		assertThat(agedBrie.sellIn, is(-1));
+		assertThat(agedBrie.sellIn, is(-2));
 		assertThat(agedBrie.quality, is(22));
 	}
 
