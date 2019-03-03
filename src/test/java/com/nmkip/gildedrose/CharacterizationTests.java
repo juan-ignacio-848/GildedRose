@@ -132,6 +132,21 @@ public class CharacterizationTests {
 		assertThat(backstagePasses.quality, is(0));
 	}
 
+    @Test
+    public void backstage_passes_quality_can_increase_up_to_50() {
+        Item backstagePasses = new Item(BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, 24, 50);
+        Item[] items = new Item[] {
+                backstagePasses
+        };
+
+        GildedRose gildedRose = new GildedRose(items);
+
+        gildedRose.updateQuality();
+
+        assertThat(backstagePasses.sellIn, is(23));
+        assertThat(backstagePasses.quality, is(50));
+    }
+
 	@Test
     public void normal_item_sellIn_decreases_by_1_and_quality_decreases_by_1_when_sellIn_is_greater_than_0() {
         Item backstagePasses = new Item(JUST_A_NORMAL_ITEM, 5, 25);
