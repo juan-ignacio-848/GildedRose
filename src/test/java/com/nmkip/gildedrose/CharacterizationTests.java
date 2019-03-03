@@ -28,7 +28,7 @@ public class CharacterizationTests {
     }
 
     @Test
-    public void aged_brie_sellIn_decreases_by_1_and_quality_increases_by_1_when_sellIn_is_less_or_equal_to_0() {
+    public void aged_brie_sellIn_decreases_by_1_and_quality_increases_by_2_when_sellIn_is_less_or_equal_to_0() {
         int sellIn = -1;
         int quality = 20;
         Item agedBrie = new Item(AGED_BRIE, sellIn, quality);
