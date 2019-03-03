@@ -1,0 +1,30 @@
+package com.nmkip.gildedrose;
+
+import org.junit.Test;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+
+public class GoldenMasterGenerator extends GoldenMaster {
+
+    @Test
+    public void generate_golden_master() throws IOException {
+        Item[] items = fromFile(INPUT);
+        GildedRose gildedRose = new GildedRose(items);
+
+        gildedRose.updateQuality();
+
+        persistOutput(items);
+    }
+
+    private void persistOutput(Item[] items) throws IOException {
+        String result = Arrays.stream(items)
+                               .map(Item::toString)
+                               .collect(Collectors.joining("\n"));
+        Files.write(Paths.get(ACCEPTED_OUTPUT), result.getBytes());
+    }
+}
