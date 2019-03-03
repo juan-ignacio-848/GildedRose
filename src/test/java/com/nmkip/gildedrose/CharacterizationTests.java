@@ -10,7 +10,7 @@ public class CharacterizationTests {
     private static final String AGED_BRIE = "Aged Brie";
     private static final String SULFURAS_HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
 	private static final String BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT = "Backstage passes to a TAFKAL80ETC concert";
-    public static final String JUST_A_NORMAL_ITEM = "Just a normal item";
+    private static final String JUST_A_NORMAL_ITEM = "Just a normal item";
 
     @Test
 	public void aged_brie_sellIn_decreases_by_1_and_quality_increases_by_1_when_sellIn_is_greater_than_0() {
@@ -118,8 +118,8 @@ public class CharacterizationTests {
     }
 
     @Test
-    public void normal_item_sellIn_decreases_by_1_and_quality_decreases_by_2_when_sellIn_is_equal_to_0() {
-        Item backstagePasses = new Item(JUST_A_NORMAL_ITEM, 0, 25);
+    public void normal_item_sellIn_decreases_by_1_and_quality_decreases_by_2_when_sellIn_is_less_or_equal_to_0() {
+        Item backstagePasses = new Item(JUST_A_NORMAL_ITEM, -1, 25);
         Item[] items = new Item[] {
                 backstagePasses
         };
@@ -128,7 +128,7 @@ public class CharacterizationTests {
 
         gildedRose.updateQuality();
 
-        assertThat(backstagePasses.sellIn, is(-1));
+        assertThat(backstagePasses.sellIn, is(-2));
         assertThat(backstagePasses.quality, is(23));
     }
 
