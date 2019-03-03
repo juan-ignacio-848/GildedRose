@@ -57,7 +57,7 @@ public class CharacterizationTests {
     }
 
 	@Test
-	public void backstage_passes_sellIn_decreases_by_1_and_quality_increases_by_1() {
+	public void backstage_passes_sellIn_decreases_by_1_and_quality_increases_by_1_when_sellIn_greater_than_11() {
 		Item backstagePasses = new Item(BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, 30, 25);
 		Item[] items = new Item[] {
 				backstagePasses
@@ -69,6 +69,21 @@ public class CharacterizationTests {
 
 		assertThat(backstagePasses.sellIn, is(29));
 		assertThat(backstagePasses.quality, is(26));
+	}
+
+	@Test
+	public void backstage_passes_sellIn_decreases_by_1_and_quality_increases_by_2_when_sellIn_less_than_11() {
+		Item backstagePasses = new Item(BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, 10, 25);
+		Item[] items = new Item[] {
+				backstagePasses
+		};
+
+		GildedRose gildedRose = new GildedRose(items);
+
+		gildedRose.updateQuality();
+
+		assertThat(backstagePasses.sellIn, is(9));
+		assertThat(backstagePasses.quality, is(27));
 	}
 
 
