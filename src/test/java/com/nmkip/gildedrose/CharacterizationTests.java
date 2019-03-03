@@ -101,5 +101,19 @@ public class CharacterizationTests {
 		assertThat(backstagePasses.quality, is(28));
 	}
 
+    @Test
+    public void normal_item_sellIn_decreases_by_1_and_quality_decreases_by_1() {
+        Item backstagePasses = new Item("Just a normal item", 5, 25);
+        Item[] items = new Item[] {
+                backstagePasses
+        };
+
+        GildedRose gildedRose = new GildedRose(items);
+
+        gildedRose.updateQuality();
+
+        assertThat(backstagePasses.sellIn, is(4));
+        assertThat(backstagePasses.quality, is(24));
+    }
 
 }
