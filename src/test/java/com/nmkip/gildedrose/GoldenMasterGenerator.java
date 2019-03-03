@@ -1,5 +1,6 @@
 package com.nmkip.gildedrose;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
 public class GoldenMasterGenerator extends GoldenMaster {
 
     @Test
+    @Ignore
     public void generate_golden_master() throws IOException {
         Item[] items = fromFile(INPUT_CASES);
         GildedRose gildedRose = new GildedRose(items);
