@@ -42,6 +42,21 @@ public class CharacterizationTests {
 		assertThat(agedBrie.quality, is(22));
 	}
 
+	@Test
+	public void aged_brie_quality_can_increase_up_to_50() {
+		Item agedBrie = new Item(AGED_BRIE, 20, 50);
+		Item[] items = new Item[] {
+				agedBrie
+		};
+
+		GildedRose gildedRose = new GildedRose(items);
+
+		gildedRose.updateQuality();
+
+		assertThat(agedBrie.sellIn, is(19));
+		assertThat(agedBrie.quality, is(50));
+	}
+
     @Test
     public void sulfuras_hand_of_ragnaros_quality_and_sellIn_remain_unchanged() {
         Item sulfurasHandOfRagnaros = new Item(SULFURAS_HAND_OF_RAGNAROS, 20, 20);
