@@ -86,5 +86,20 @@ public class CharacterizationTests {
 		assertThat(backstagePasses.quality, is(27));
 	}
 
+	@Test
+	public void backstage_passes_sellIn_decreases_by_1_and_quality_increases_by_3_when_sellIn_less_than_6() {
+		Item backstagePasses = new Item(BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, 5, 25);
+		Item[] items = new Item[] {
+				backstagePasses
+		};
+
+		GildedRose gildedRose = new GildedRose(items);
+
+		gildedRose.updateQuality();
+
+		assertThat(backstagePasses.sellIn, is(4));
+		assertThat(backstagePasses.quality, is(28));
+	}
+
 
 }
