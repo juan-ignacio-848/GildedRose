@@ -16,9 +16,9 @@ public class GoldenMasterGenerator extends GoldenMaster {
     @Ignore
     public void generate_golden_master() throws IOException {
         Item[] items = fromFile(INPUT_CASES);
-        GildedRose gildedRose = new GildedRose(items);
+        GildedRose gildedRose = new GildedRose(new SellInControl(), new QualityControlFactory());
 
-        gildedRose.updateQuality();
+        gildedRose.updateQuality(items);
 
         persistOutput(items);
     }
