@@ -1,11 +1,8 @@
 package com.nmkip.gildedrose;
 
-class SulfurasHandQualityControl extends QualityControl {
-    SulfurasHandQualityControl(Item item) {
-        super(item);
-    }
+class SulfurasHandQualityControl implements QualityControl {
 
     @Override
-    void updateQuality() {
+    public void updateQuality(Item item) {
     }
 }

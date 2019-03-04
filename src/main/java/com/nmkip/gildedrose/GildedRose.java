@@ -15,8 +15,8 @@ class GildedRose {
 
     private void updateItem(Item item) {
         updateSellIn(item);
-
-        QualityControl.qualityControlFor(item).updateQuality();
+        QualityControlFactory qualityControlFactory = new QualityControlFactory();
+        qualityControlFactory.qualityControlFor(item).updateQuality(item);
     }
 
     private void updateSellIn(Item item) {

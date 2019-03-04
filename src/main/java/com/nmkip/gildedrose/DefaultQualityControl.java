@@ -1,14 +1,15 @@
 package com.nmkip.gildedrose;
 
-class DefaultQualityControl extends QualityControl {
-    DefaultQualityControl(Item item) {
-        super(item);
-    }
+import static java.lang.Math.*;
+
+class DefaultQualityControl implements QualityControl {
 
     @Override
-    void updateQuality() {
-        decreaseQualityBy1(item);
-        if(item.sellIn < 0)
-            decreaseQualityBy1(item);
+    public void updateQuality(Item item) {
+        item.quality = max(item.quality - decrementFor(item), MINIMUM_ITEM_QUALITY);
+    }
+
+    private int decrementFor(Item item) {
+        return item.sellIn < 0 ? BASE_DECREMENT * 2 : BASE_DECREMENT;
     }
 }

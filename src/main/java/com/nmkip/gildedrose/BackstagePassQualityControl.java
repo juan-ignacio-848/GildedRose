@@ -1,27 +1,20 @@
 package com.nmkip.gildedrose;
 
-class BackstagePassQualityControl extends QualityControl {
-    BackstagePassQualityControl(Item item) {
-        super(item);
-    }
+import static java.lang.Math.*;
+
+class BackstagePassQualityControl implements QualityControl {
 
     @Override
-    void updateQuality() {
-        if (item.quality < 50) {
+    public void updateQuality(Item item) {
+        item.quality = item.sellIn < 0 ? 0 : min(item.quality + incrementFor(item), MAXIMUM_ITEM_QUALITY);
+    }
 
-            item.quality = item.quality + 1;
-
-            if (item.sellIn < 11) {
-                increaseQualityBy1(item);
-            }
-
-            if (item.sellIn < 6) {
-                increaseQualityBy1(item);
-            }
-        }
-
-        if(item.sellIn < 0) {
-            item.quality = 0;
-        }
+    private int incrementFor(Item item) {
+        if (item.sellIn < 6)
+            return BASE_INCREMENT * 3;
+        if (item.sellIn < 11)
+            return BASE_INCREMENT * 2;
+        else
+            return BASE_INCREMENT;
     }
 }
