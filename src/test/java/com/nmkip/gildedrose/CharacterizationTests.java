@@ -159,4 +159,29 @@ public class CharacterizationTests {
         assertThat(normalItem.quality, is(quality - 2));
     }
 
+    @Test
+    public void conjured_items_sellIn_decreases_by_1_and_quality_decreases_by_2_when_sellIn_is_greater_than_0() {
+        int sellIn = 5;
+        int quality = 25;
+        Item conjuredItem = new Item("Conjured Boot", sellIn, quality);
+        Item[] items = new Item[]{conjuredItem};
+
+        gildedRose.updateQuality(items);
+
+        assertThat(conjuredItem.sellIn, is(sellIn - 1));
+        assertThat(conjuredItem.quality, is(quality - 2));
+    }
+
+    @Test
+    public void conjured_items_sellIn_decreases_by_1_and_quality_decreases_by_2_when_sellIn_is_less_or_equal_than_0() {
+        int sellIn = -2;
+        int quality = 25;
+        Item conjuredItem = new Item("Conjured Boot", sellIn, quality);
+        Item[] items = new Item[]{conjuredItem};
+
+        gildedRose.updateQuality(items);
+
+        assertThat(conjuredItem.sellIn, is(sellIn - 1));
+        assertThat(conjuredItem.quality, is(quality - 4));
+    }
 }

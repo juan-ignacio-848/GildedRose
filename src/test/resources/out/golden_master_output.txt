@@ -70,3 +70,21 @@ Some non special item; 24; 1
 Some non special item; 24; 2
 Some non special item; 24; 48
 Some non special item; 24; 49
+Conjured Potion; -1; 0
+Conjured Potion; -1; 0
+Conjured Potion; -1; 0
+Conjured Potion; -1; 0
+Conjured Potion; -1; 45
+Conjured Potion; -1; 46
+Conjured Potion; 4; 0
+Conjured Potion; 4; 0
+Conjured Potion; 4; 0
+Conjured Potion; 4; 1
+Conjured Potion; 4; 47
+Conjured Potion; 4; 48
+Conjured Potion; 24; 0
+Conjured Potion; 24; 0
+Conjured Potion; 24; 0
+Conjured Potion; 24; 1
+Conjured Potion; 24; 47
+Conjured Potion; 24; 48
