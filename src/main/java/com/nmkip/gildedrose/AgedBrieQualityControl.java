@@ -2,15 +2,19 @@ package com.nmkip.gildedrose;
 
 class AgedBrieQualityControl extends QualityControl {
 
-    protected AgedBrieQualityControl(Item item) {
+    private static final int BASE_INCREMENT = 1;
+    private static final int MAXIMUM_ITEM_QUALITY = 50;
+
+    AgedBrieQualityControl(Item item) {
         super(item);
     }
 
     @Override
     void updateQuality() {
-        increaseQualityBy1(item);
-        if(item.sellIn < 0)
-            increaseQualityBy1(item);
+        item.quality = Math.min(item.quality + increaseFor(item), MAXIMUM_ITEM_QUALITY);
+    }
 
+    private int increaseFor(Item item) {
+        return item.sellIn < 0 ? BASE_INCREMENT * 2 : BASE_INCREMENT;
     }
 }
