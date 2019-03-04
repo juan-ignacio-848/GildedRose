@@ -1,5 +1,6 @@
 package com.nmkip.gildedrose;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -11,6 +12,12 @@ public class CharacterizationTests {
     private static final String SULFURAS_HAND_OF_RAGNAROS = "Sulfuras, Hand of Ragnaros";
     private static final String BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT = "Backstage passes to a TAFKAL80ETC concert";
     private static final String JUST_A_NORMAL_ITEM = "Just a normal item";
+    private GildedRose gildedRose;
+
+    @Before
+    public void setUp() {
+        gildedRose = new GildedRose(new SellInControl(), new QualityControlFactory());
+    }
 
     @Test
     public void aged_brie_sellIn_decreases_by_1_and_quality_increases_by_1_when_sellIn_is_greater_than_0() {
@@ -19,9 +26,7 @@ public class CharacterizationTests {
         Item agedBrie = new Item(AGED_BRIE, sellIn, quality);
         Item[] items = new Item[]{agedBrie};
 
-        GildedRose gildedRose = new GildedRose(items);
-
-        gildedRose.updateQuality();
+        gildedRose.updateQuality(items);
 
         assertThat(agedBrie.sellIn, is(sellIn - 1));
         assertThat(agedBrie.quality, is(quality + 1));
@@ -33,9 +38,8 @@ public class CharacterizationTests {
         int quality = 20;
         Item agedBrie = new Item(AGED_BRIE, sellIn, quality);
         Item[] items = new Item[]{agedBrie};
-        GildedRose gildedRose = new GildedRose(items);
 
-        gildedRose.updateQuality();
+        gildedRose.updateQuality(items);
 
         assertThat(agedBrie.sellIn, is(sellIn - 1));
         assertThat(agedBrie.quality, is(quality + 2));
@@ -47,9 +51,8 @@ public class CharacterizationTests {
         int quality = 50;
         Item agedBrie = new Item(AGED_BRIE, sellIn, quality);
         Item[] items = new Item[]{agedBrie};
-        GildedRose gildedRose = new GildedRose(items);
 
-        gildedRose.updateQuality();
+        gildedRose.updateQuality(items);
 
         assertThat(agedBrie.sellIn, is(sellIn - 1));
         assertThat(agedBrie.quality, is(quality));
@@ -61,9 +64,8 @@ public class CharacterizationTests {
         int quality = 20;
         Item sulfurasHandOfRagnaros = new Item(SULFURAS_HAND_OF_RAGNAROS, sellIn, quality);
         Item[] items = new Item[]{sulfurasHandOfRagnaros};
-        GildedRose gildedRose = new GildedRose(items);
 
-        gildedRose.updateQuality();
+        gildedRose.updateQuality(items);
 
         assertThat(sulfurasHandOfRagnaros.sellIn, is(sellIn));
         assertThat(sulfurasHandOfRagnaros.quality, is(quality));
@@ -73,9 +75,8 @@ public class CharacterizationTests {
     public void backstage_passes_sellIn_decreases_by_1_and_quality_increases_by_1_when_sellIn_greater_than_11() {
         Item backstagePasses = new Item(BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, 30, 25);
         Item[] items = new Item[]{backstagePasses};
-        GildedRose gildedRose = new GildedRose(items);
 
-        gildedRose.updateQuality();
+        gildedRose.updateQuality(items);
 
         assertThat(backstagePasses.sellIn, is(29));
         assertThat(backstagePasses.quality, is(26));
@@ -87,9 +88,8 @@ public class CharacterizationTests {
         int quality = 25;
         Item backstagePasses = new Item(BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, sellIn, quality);
         Item[] items = new Item[]{backstagePasses};
-        GildedRose gildedRose = new GildedRose(items);
 
-        gildedRose.updateQuality();
+        gildedRose.updateQuality(items);
 
         assertThat(backstagePasses.sellIn, is(sellIn - 1));
         assertThat(backstagePasses.quality, is(quality + 2));
@@ -101,9 +101,8 @@ public class CharacterizationTests {
         int quality = 25;
         Item backstagePasses = new Item(BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, sellIn, quality);
         Item[] items = new Item[]{backstagePasses};
-        GildedRose gildedRose = new GildedRose(items);
 
-        gildedRose.updateQuality();
+        gildedRose.updateQuality(items);
 
         assertThat(backstagePasses.sellIn, is(sellIn - 1));
         assertThat(backstagePasses.quality, is(quality + 3));
@@ -114,9 +113,8 @@ public class CharacterizationTests {
         int sellIn = -1;
         Item backstagePasses = new Item(BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, sellIn, 25);
         Item[] items = new Item[]{backstagePasses};
-        GildedRose gildedRose = new GildedRose(items);
 
-        gildedRose.updateQuality();
+        gildedRose.updateQuality(items);
 
         assertThat(backstagePasses.sellIn, is(sellIn - 1));
         assertThat(backstagePasses.quality, is(0));
@@ -128,9 +126,8 @@ public class CharacterizationTests {
         int quality = 50;
         Item backstagePasses = new Item(BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT, sellIn, quality);
         Item[] items = new Item[]{backstagePasses};
-        GildedRose gildedRose = new GildedRose(items);
 
-        gildedRose.updateQuality();
+        gildedRose.updateQuality(items);
 
         assertThat(backstagePasses.sellIn, is(sellIn - 1));
         assertThat(backstagePasses.quality, is(quality));
@@ -142,9 +139,8 @@ public class CharacterizationTests {
         int quality = 25;
         Item normalItem = new Item(JUST_A_NORMAL_ITEM, sellIn, quality);
         Item[] items = new Item[]{normalItem};
-        GildedRose gildedRose = new GildedRose(items);
 
-        gildedRose.updateQuality();
+        gildedRose.updateQuality(items);
 
         assertThat(normalItem.sellIn, is(sellIn - 1));
         assertThat(normalItem.quality, is(quality - 1));
@@ -156,9 +152,8 @@ public class CharacterizationTests {
         int quality = 25;
         Item normalItem = new Item(JUST_A_NORMAL_ITEM, sellIn, quality);
         Item[] items = new Item[]{normalItem};
-        GildedRose gildedRose = new GildedRose(items);
 
-        gildedRose.updateQuality();
+        gildedRose.updateQuality(items);
 
         assertThat(normalItem.sellIn, is(sellIn - 1));
         assertThat(normalItem.quality, is(quality - 2));

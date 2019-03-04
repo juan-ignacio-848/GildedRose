@@ -1,30 +1,31 @@
 package com.nmkip.gildedrose;
 
 class GildedRose {
-    Item[] items;
+    private final SellInControl sellInControl;
+    private final QualityControlFactory qualityControlFactory;
 
-    GildedRose(Item[] items) {
-        this.items = items;
+    GildedRose(SellInControl sellInControl, QualityControlFactory qualityControlFactory) {
+        this.sellInControl = sellInControl;
+        this.qualityControlFactory = qualityControlFactory;
     }
 
-    void updateQuality() {
+    void updateQuality(Item[] items) {
         for (Item item : items) {
             updateItem(item);
         }
     }
 
     private void updateItem(Item item) {
-        updateSellIn(item);
-        QualityControlFactory qualityControlFactory = new QualityControlFactory();
+        updateSellInFor(item);
+        updateQualityFor(item);
+    }
+
+    private void updateQualityFor(Item item) {
         qualityControlFactory.qualityControlFor(item).updateQuality(item);
     }
 
-    private void updateSellIn(Item item) {
-        if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
-            return;
-        } else {
-            item.sellIn = item.sellIn - 1;
-        }
+    private void updateSellInFor(Item item) {
+        sellInControl.updateSellIn(item);
     }
 
 }
