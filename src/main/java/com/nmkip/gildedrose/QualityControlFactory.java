@@ -8,16 +8,17 @@ class QualityControlFactory {
     private static final String CONJURED = "Conjured";
 
     QualityControl qualityControlFor(Item item) {
-        if (AGED_BRIE.equals(item.name))
+        if (AGED_BRIE.equals(item.name)) {
             return new AgedBrieQualityControl();
-        else if (BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT.equals(item.name))
+        } else if (BACKSTAGE_PASSES_TO_A_TAFKAL80ETC_CONCERT.equals(item.name)) {
             return new BackstagePassQualityControl();
-        else if (SULFURAS_HAND_OF_RAGNAROS.equals(item.name))
+        } else if (SULFURAS_HAND_OF_RAGNAROS.equals(item.name)) {
             return new SulfurasHandQualityControl();
-        else if (item.name.startsWith(CONJURED))
+        } else if (item.name.startsWith(CONJURED))
             return new ConjuredItemQualityControl();
-        else
+        else {
             return new DefaultQualityControl();
+        }
 
     }
 }
